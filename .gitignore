@@ -2,7 +2,7 @@
 node_modules/
 
 # 构建输出
-build/
+# build/  # 注释掉，允许提交 build
 dist/
 
 # 测试覆盖率
