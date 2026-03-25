@@ -20,11 +20,11 @@ const RiskModule: React.FC<Props> = ({ globalFilter }) => {
   const detailData = useMemo(() => getRiskDetailData(globalFilter), [globalFilter]);
   const drilldownData = useMemo(
     () => getRiskDrilldownData(selectedLoanMonth, drilldownDimension),
-    [globalFilter, selectedLoanMonth, drilldownDimension]
+    [selectedLoanMonth, drilldownDimension]
   );
   const drilldownVintageData = useMemo(
     () => getRiskDrilldownVintageData(selectedLoanMonth, drilldownDimension),
-    [globalFilter, selectedLoanMonth, drilldownDimension]
+    [selectedLoanMonth, drilldownDimension]
   );
 
   const cohorts = [...new Set(vintageData.map((item) => item.cohort))];

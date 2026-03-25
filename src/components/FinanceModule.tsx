@@ -37,8 +37,8 @@ const FinanceModule: React.FC<Props> = ({ globalFilter }) => {
   const [selectedAssets, setSelectedAssets] = useState<string[]>([assetOptions[0].value]);
   const [assetTrendTarget, setAssetTrendTarget] = useState<string>(assetOptions[0].value);
 
-  const monthlyData = useMemo(() => getFinancialMonthlyData(globalFilter), [globalFilter, fy]);
-  const assetData = useMemo(() => getAssetDetailData(globalFilter), [globalFilter, fy]);
+  const monthlyData = useMemo(() => getFinancialMonthlyData(globalFilter), [globalFilter]);
+  const assetData = useMemo(() => getAssetDetailData(globalFilter), [globalFilter]);
 
   const filteredAssetData = useMemo(
     () => assetData.filter((d) => selectedAssets.includes(d.assetName)),
@@ -49,7 +49,7 @@ const FinanceModule: React.FC<Props> = ({ globalFilter }) => {
     if (!selectedAssets.includes(assetTrendTarget)) {
       setAssetTrendTarget(selectedAssets[0] ?? assetOptions[0].value);
     }
-  }, [assetTrendTarget, selectedAssets]);
+  }, [selectedAssets, assetTrendTarget]);
 
   type AssetPivotRow = {
     key: string;
@@ -107,7 +107,7 @@ const FinanceModule: React.FC<Props> = ({ globalFilter }) => {
     });
 
     return rows;
-  }, [filteredAssetData, selectedAssets, monthKeys]);
+  }, [filteredAssetData, selectedAssets, monthKeys, metricRows]);
 
   const assetPivotColumns: ColumnsType<AssetPivotRow> = useMemo(
     () => [
@@ -128,7 +128,7 @@ const FinanceModule: React.FC<Props> = ({ globalFilter }) => {
         width: 120,
       })),
     ],
-    [monthKeys, assetTrendTarget]
+    [monthKeys]
   );
 
   const selectedAssetTrendList = useMemo(() => {
